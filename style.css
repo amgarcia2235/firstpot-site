@@ -9,3 +9,14 @@ p, li { color: var(--fg); }
 .card { background: var(--card); border-radius: 20px; padding: 20px; margin: 16px 0; }
 a { color: var(--link); text-underline-offset: 3px; }
 nav { display: flex; gap: 16px; margin-bottom: 32px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px 9px 0; border-bottom: 1px solid #3a4440; }
+th { color: var(--muted); font-weight: 600; font-size: 15px; }
+ol, ul { padding-left: 22px; }
+li { margin: 0 0 12px; }
+.photo { width: 100%; height: auto; border-radius: 20px; display: block; margin: 16px 0 6px; }
+.small { font-size: 14px; margin-top: 0; }
+.cue { font-style: normal; color: #7fd1be; }
+.facts { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+.facts dt { color: var(--muted); font-weight: 600; }
+.facts dd { margin: 0; }
