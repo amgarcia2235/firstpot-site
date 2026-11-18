@@ -1,0 +1,245 @@
+/* First Pot. The app's rules, on the web:
+   the ground is cast iron; colour is enamel, always a solid fill; words sit on opaque panels;
+   corners come from one scale (24, 20, 12, 5). No gradients, blur, pale tints or soft shadows.
+   style.css stays as it is for the recipe pages. */
+
+:root {
+  color-scheme: dark;
+  --iron: #171c1a;
+  --surface: #262e2b;
+  --line: #3a4440;
+  --ink: #f1f3ee;
+  --soft: #a9b2ad;
+  --cream: #fff8ec;
+  --mint: #7fd1be;
+  --chili: #c2331f;
+  --chili-deep: #8e2414;
+  --mustard: #d9a21b;
+  --mustard-ink: #2a1e05;
+  --r-card: 24px;
+  --r-panel: 20px;
+  --r-inner: 12px;
+  --r-stamp: 5px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --page: min(1240px, 100% - 2 * var(--gutter));
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --cut: BlinkMacSystemFont, -apple-system, "Roboto Condensed", "Arial Narrow", sans-serif-condensed, Impact, "Helvetica Neue", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--iron); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--iron); color: var(--ink); font: 400 18px/1.5 var(--sans); overflow-wrap: break-word; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: var(--mint); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; border-radius: var(--r-stamp); }
+
+/* The two branded cuts of the system font. */
+.cut, h1, h2, .num, .clock, .wordmark {
+  font-family: var(--cut);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 30;
+  text-transform: uppercase;
+  line-height: .94;
+  letter-spacing: .012em;
+  text-wrap: balance;
+}
+.stamp, .free li::after, .free .muted {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: var(--r-stamp);
+  background: var(--iron);
+  color: var(--cream);
+  font-family: var(--cut);
+  font-size: 14px;
+  font-weight: 800;
+  font-stretch: 75%;
+  letter-spacing: .09em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.skip { position: absolute; left: 16px; top: -80px; z-index: 10; padding: 10px 16px; border-radius: var(--r-stamp); background: var(--cream); color: var(--iron); font-weight: 700; }
+.skip:focus { top: 12px; }
+
+/* Top of the page */
+.bar { width: var(--page); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; }
+.wordmark { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--ink); font-size: 38px; text-decoration: none; }
+.wordmark svg { width: auto; height: 30px; flex: none; fill: var(--chili); }
+.bar nav { display: flex; gap: 22px; }
+.bar nav a { color: var(--ink); font-weight: 600; font-size: 16px; padding: 10px 0; }
+
+/* Opening slab: solid chili, the first screen rising out of it */
+.open { background: var(--chili); color: var(--cream); overflow: hidden; }
+.open-in { width: var(--page); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: end; padding-top: clamp(36px, 6vw, 84px); }
+.open-text { padding-bottom: clamp(40px, 6vw, 84px); }
+h1 { margin: 18px 0 0; font-size: clamp(76px, 10.4vw, 150px); }
+h1 span { display: block; }
+h1 .block { width: fit-content; margin: .05em 0 .05em -.08em; padding: .05em .1em .02em; border-radius: var(--r-inner); background: var(--iron); }
+.lede { max-width: 25em; margin-top: 26px; font-size: clamp(24px, 2.2vw, 30px); font-weight: 700; line-height: 1.22; }
+.badge { display: inline-block; margin-top: 30px; }
+.badge img { width: auto; height: 56px; }
+.open-shot { justify-self: center; width: min(100%, 410px); height: clamp(460px, 50vw, 660px); overflow: hidden; border: 8px solid var(--iron); border-bottom: 0; border-radius: var(--r-card) var(--r-card) 0 0; background: var(--iron); }
+
+/* The page runs like the app's cook mode: a numbered enamel slab for each step */
+.step { width: var(--page); margin-inline: auto; padding-top: clamp(64px, 9vw, 128px); }
+.slab { display: flex; align-items: center; gap: clamp(16px, 2.6vw, 34px); padding: clamp(18px, 2.4vw, 30px) clamp(20px, 3vw, 40px); border-radius: var(--r-card); background: var(--e); color: var(--on); }
+.num { flex: none; font-size: clamp(104px, 15vw, 208px); line-height: .8; }
+.slab h2 { margin: 12px 0 0; font-size: clamp(46px, 9.4vw, 136px); }
+.intro { max-width: 34em; margin-top: 24px; font-size: clamp(19px, 1.7vw, 22px); }
+
+.e-mustard { --e: var(--mustard); --on: var(--mustard-ink); --lip: #a87a0c; }
+.e-cobalt { --e: #2759a8; --on: var(--cream); --lip: #1a3e7a; }
+.e-teal { --e: #1f7a7a; --on: var(--cream); --lip: #145656; }
+.e-forest { --e: #2f6b4a; --on: var(--cream); --lip: #1f4a32; }
+.e-sage { --e: #8fa58a; --on: #15201a; --lip: #64795f; }
+.e-berry { --e: #a62b55; --on: var(--cream); --lip: #771c3b; }
+.e-ink { --e: #2b3a55; --on: var(--cream); --lip: #1b2538; }
+.e-brick { --e: #8c3a2b; --on: var(--cream); --lip: #61261b; }
+.e-plum { --e: #6e3b5e; --on: var(--cream); --lip: #4c2741; }
+/* These three keep cream type at 4.5:1 only on their deep shade, so the deep shade is the face. */
+.e-olive { --e: #4d5a1b; --on: var(--cream); --lip: #6f7d2b; }
+.e-paprika { --e: #9c3a19; --on: var(--cream); --lip: #d2552b; }
+
+/* Step 1: the shelf. The list inside the markers is written by scripts/build_site.py, so it is styled as it comes. */
+.free h2, .more h2 { margin: clamp(36px, 5vw, 60px) 0 18px; font-size: clamp(36px, 4.6vw, 60px); }
+.free ul, .more ul { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.free li { --e: #1f7a7a; --on: var(--cream); --lip: #145656; position: relative; display: flex; flex-direction: column; overflow: hidden; border-bottom: 7px solid var(--lip); border-radius: var(--r-card); background: var(--e); transition: transform .12s ease-out; }
+.free li::before { content: ""; aspect-ratio: 1; background: var(--lip) center / cover no-repeat; }
+.free li::after { content: "Free"; pointer-events: none; position: absolute; top: 12px; left: 12px; background: var(--mustard); color: var(--mustard-ink); }
+.free li a { flex: 1; padding: 16px 16px 12px; color: var(--on); font-family: var(--cut); font-size: clamp(27px, 2.5vw, 33px); font-weight: 900; font-stretch: 75%; font-variation-settings: "wdth" 40; line-height: 1; text-decoration: none; }
+.free li a::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-card); }
+.free li a:focus-visible { outline: none; }
+.free li a:focus-visible::after { border: 4px solid var(--iron); outline: 3px solid var(--cream); outline-offset: -7px; }
+.free .muted { align-self: flex-start; margin: 0 16px 16px; }
+.free li:hover { transform: translateY(4px); }
+.free li:has(a[href*="gochujang-butter-noodles"]) { --e: #c2331f; --on: var(--cream); --lip: #8e2414; }
+.free li:has(a[href*="one-pot-chicken-and-rice"]) { --e: #d9a21b; --on: var(--mustard-ink); --lip: #a87a0c; }
+.free li:has(a[href*="lasagna-soup"]) { --e: #b8402e; --on: var(--cream); --lip: #85291c; }
+.free li:has(a[href*="marry-me-chicken-orzo"]) { --e: #b24f64; --on: var(--cream); --lip: #823748; }
+.free li:has(a[href*="french-onion-pasta"]) { --e: #7a4819; --on: var(--cream); --lip: #a8672c; }
+.free li:has(a[href*="gochujang-butter-noodles"])::before { background-image: url("img/shelf/gochujang-butter-noodles.jpg"); }
+.free li:has(a[href*="one-pot-chicken-and-rice"])::before { background-image: url("img/shelf/one-pot-chicken-and-rice.jpg"); }
+.free li:has(a[href*="lasagna-soup"])::before { background-image: url("img/shelf/lasagna-soup.jpg"); }
+.free li:has(a[href*="marry-me-chicken-orzo"])::before { background-image: url("img/shelf/marry-me-chicken-orzo.jpg"); }
+.free li:has(a[href*="french-onion-pasta"])::before { background-image: url("img/shelf/french-onion-pasta.jpg"); }
+
+.more li { display: flex; align-items: flex-end; min-height: clamp(104px, 11vw, 148px); padding: 14px 16px; border-bottom: 7px solid var(--lip); border-radius: var(--r-card); background: var(--e); color: var(--on); font-family: var(--cut); font-size: clamp(24px, 2.2vw, 29px); font-weight: 900; font-stretch: 75%; font-variation-settings: "wdth" 40; line-height: 1.02; }
+.more li.e-ink { border: 2px solid var(--line); border-bottom-width: 7px; }
+
+/* Steps 2, 3 and 5: a slab, an opaque panel and the real screen */
+.work { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 3vw, 40px); align-items: stretch; margin-top: clamp(20px, 3vw, 40px); }
+.work.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.work.flip .words { order: 2; }
+.words { display: grid; grid-template-rows: 1fr auto; gap: 14px; }
+.work.flip .words { grid-template-rows: 1fr; }
+.work .panel { font-size: clamp(19px, 1.8vw, 24px); line-height: 1.38; }
+.work.flip .panel { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+.panel { padding: clamp(20px, 2.4vw, 30px); border-radius: var(--r-panel); background: var(--surface); }
+.panel p + p { margin-top: 14px; }
+.lines li { position: relative; padding-left: 20px; }
+.lines li + li { margin-top: 12px; }
+.lines li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: var(--r-stamp); background: var(--soft); }
+.look { margin-top: 18px; padding: 16px 18px 18px; border-radius: var(--r-inner); background: var(--mint); color: var(--iron); font-weight: 600; }
+.look .stamp { display: table; margin-bottom: 10px; }
+.shot { justify-self: center; align-self: start; width: min(100%, 410px); overflow: hidden; border: 6px solid var(--line); border-radius: var(--r-card); background: var(--iron); }
+.shot.wide { width: 100%; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tile { display: grid; justify-items: center; align-content: center; gap: 12px; padding: 18px 10px 16px; border: 2px solid var(--line); border-radius: var(--r-inner); background: var(--iron); }
+.tile b { font-family: var(--cut); font-size: clamp(96px, 17vw, 250px); font-weight: 900; font-stretch: 75%; font-variation-settings: "wdth" 30; line-height: .9; }
+.tile span { font-family: var(--cut); font-size: clamp(15px, 1.5vw, 20px); font-weight: 800; font-stretch: 75%; letter-spacing: .09em; text-transform: uppercase; }
+.tile.on { border-color: #823748; background: #823748; color: #fff; }
+
+/* Step 4: a whole field of plum, and the clock as big as the page */
+.field { margin-top: clamp(64px, 9vw, 128px); background: #6e3b5e; color: var(--cream); overflow: hidden; }
+.field-in { width: var(--page); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: end; padding-top: clamp(44px, 6vw, 84px); }
+.field-text { padding-bottom: clamp(44px, 6vw, 84px); }
+.field h2 { margin: 14px 0 0; font-size: clamp(46px, 6.4vw, 92px); }
+.clock { margin: 18px 0 18px -.03em; font-size: clamp(150px, 27vw, 380px); font-variant-numeric: tabular-nums; line-height: .84; }
+.field p.say { max-width: 27em; font-size: clamp(20px, 1.9vw, 24px); font-weight: 600; line-height: 1.35; }
+.field-shot { justify-self: center; width: min(100%, 410px); height: clamp(460px, 50vw, 640px); overflow: hidden; border: 8px solid var(--iron); border-bottom: 0; border-radius: var(--r-card) var(--r-card) 0 0; background: var(--iron); }
+
+/* Step 5: the plate the app stamps when you finish */
+.plate { display: flex; align-items: center; align-self: center; justify-self: center; gap: clamp(16px, 2.4vw, 34px); width: fit-content; max-width: 100%; margin: 18px 8px; padding: clamp(18px, 3vw, 44px) clamp(24px, 4vw, 60px); border-radius: var(--r-inner); background: var(--chili); color: var(--cream); transform: rotate(-4deg); }
+.plate svg { width: clamp(84px, 16vw, 230px); height: auto; flex: none; fill: var(--cream); }
+.plate b { font-family: var(--cut); font-size: clamp(68px, 13vw, 190px); white-space: nowrap; font-weight: 900; font-stretch: 75%; font-variation-settings: "wdth" 30; line-height: .9; }
+
+/* The deal: solid mustard */
+.deal { margin-top: clamp(64px, 9vw, 128px); background: var(--mustard); color: var(--mustard-ink); overflow: hidden; }
+.deal-in { width: var(--page); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: end; padding-top: clamp(44px, 6vw, 84px); }
+.deal :focus-visible { outline-color: var(--iron); }
+.deal-text { padding-bottom: clamp(44px, 6vw, 84px); }
+.deal h2 { margin: 0; font-size: clamp(76px, 12vw, 176px); }
+.deal h2 span { display: block; }
+.deal h2 .block { width: fit-content; margin: .05em 0 .05em -.08em; padding: .05em .1em .02em; border-radius: var(--r-inner); background: var(--chili); color: var(--cream); }
+.deal p.say { max-width: 29em; margin-top: 26px; font-size: clamp(20px, 1.9vw, 24px); font-weight: 600; line-height: 1.35; }
+.nos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.deal-shot { justify-self: center; width: min(100%, 410px); height: clamp(460px, 48vw, 620px); overflow: hidden; border: 8px solid var(--iron); border-bottom: 0; border-radius: var(--r-card) var(--r-card) 0 0; background: var(--iron); }
+
+/* Plain facts about the recipes */
+.about { width: var(--page); margin-inline: auto; padding-block: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.about h2 { margin: 0 0 12px; font-size: clamp(34px, 3.4vw, 46px); }
+
+.foot { border-top: 2px solid var(--line); }
+.foot-in { width: var(--page); margin-inline: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; padding-block: 28px 36px; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.foot nav a { padding: 8px 0; color: var(--ink); }
+
+/* Privacy and support: the words are untouched; only the page around them changes */
+.doc main { width: min(780px, 100% - 2 * var(--gutter)); margin-inline: auto; padding-bottom: 72px; }
+.doc main > nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; margin-bottom: 18px; }
+.doc main > nav a { color: var(--ink); font-weight: 600; font-size: 16px; padding: 10px 0; }
+.doc main > nav a:first-child { display: inline-flex; align-items: center; gap: 10px; font-family: var(--cut); font-size: 38px; font-weight: 900; font-stretch: 75%; font-variation-settings: "wdth" 30; line-height: .94; text-decoration: none; text-transform: uppercase; padding: 0; }
+.doc main > nav a:first-child::before { content: ""; width: 53px; height: 30px; flex: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 176 100' fill='%23c2331f'%3E%3Crect x='.2' y='36.1' width='24.6' height='15.7' rx='7.8'/%3E%3Crect x='151.2' y='36.1' width='24.6' height='15.7' rx='7.8'/%3E%3Crect x='13.1' y='10.1' width='149.9' height='11.2' rx='5.6'/%3E%3Crect x='75.7' y='2.9' width='24.6' height='10.1' rx='5'/%3E%3Cpath fill-rule='evenodd' d='M18.65 23.94H157.35V68.05Q157.35 100 125.4 100H50.6Q18.65 100 18.65 68.05ZM97.45 41.4V88.6H85.65V53L78.55 58.5V47L85 41.4Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+.doc h1 { margin: 0 0 16px; padding: clamp(22px, 4vw, 36px) clamp(20px, 4vw, 36px) clamp(18px, 3.4vw, 30px); border-radius: var(--r-card); background: #145656; color: var(--cream); font-size: clamp(60px, 11vw, 112px); }
+.doc.privacy h1 { background: #2b3a55; }
+.doc h2 { margin: 42px 0 12px; font-size: clamp(32px, 4.4vw, 42px); }
+.doc p { margin: 0 0 14px; }
+.doc .muted { color: var(--soft); }
+.doc .card { margin: 16px 0 8px; padding: clamp(20px, 3vw, 28px); border-radius: var(--r-panel); background: var(--surface); }
+.doc .card p:last-child { margin-bottom: 0; }
+.doc main ul { margin: 0 0 14px; }
+.doc main li { position: relative; margin: 0 0 12px; padding-left: 20px; }
+.doc main li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: var(--r-stamp); background: var(--soft); }
+
+/* The page that is not there */
+.lost { width: var(--page); min-height: 62vh; margin-inline: auto; padding-block: clamp(32px, 6vw, 72px); }
+.lost .slab { display: block; background: var(--chili); color: var(--cream); }
+.lost h1 { margin: 12px 0 0; font-size: clamp(76px, 15vw, 210px); }
+.lost p.say { margin-top: 26px; font-size: clamp(20px, 2vw, 24px); }
+.back { display: inline-block; margin-top: 26px; padding: 15px 24px; border-bottom: 5px solid var(--chili-deep); border-radius: var(--r-inner); background: var(--chili); color: var(--cream); font-size: 19px; font-weight: 700; text-decoration: none; text-transform: uppercase; }
+
+@media (max-width: 940px) {
+  .open h1 { font-size: clamp(58px, 19.4vw, 170px); }
+  .free ul, .more ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .open-in, .field-in, .deal-in { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .open-text, .field-text, .deal :focus-visible { outline-color: var(--iron); }
+.deal-text { padding-bottom: 36px; }
+  .open-shot, .field-shot, .deal-shot { height: 500px; }
+  .work, .work.flip { grid-template-columns: minmax(0, 1fr); }
+  .work.flip .words { order: 0; }
+  .about { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  body { font-size: 17px; }
+  .free ul, .more ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .free li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .free li:last-child:nth-child(odd)::before { aspect-ratio: 2; }
+  .more li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .slab { align-items: flex-start; }
+  .clock { font-size: 50vw; }
+}
+@media (max-width: 360px) {
+  .wordmark, .doc main > nav a:first-child { font-size: 31px; }
+  .wordmark svg { height: 24px; }
+  .bar nav { gap: 14px; }
+  .stamp { letter-spacing: .05em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .free li:hover { transform: none; }
+}
