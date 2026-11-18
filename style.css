@@ -4,6 +4,10 @@ body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.55 -appl
 main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
 h1 { font-size: 34px; line-height: 1.15; margin: 0 0 8px; font-weight: 600; }
 h2 { font-size: 21px; margin: 32px 0 8px; font-weight: 600; }
+/* The name as the app draws it: the chili pot with a 1 cut out of it, beside FIRST POT in heavy condensed capitals.
+   The system's own condensed cut where there is one; no font is downloaded. */
+.wordmark { display: flex; align-items: center; gap: 10px; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial Narrow", sans-serif-condensed, "Roboto Condensed", sans-serif; font-size: 44px; font-weight: 900; font-stretch: condensed; text-transform: uppercase; letter-spacing: -0.5px; line-height: 1; }
+.wordmark svg { height: 0.78em; width: auto; flex: none; fill: #c2331f; }
 p, li { color: var(--fg); }
 .muted { color: var(--muted); }
 .card { background: var(--card); border-radius: 20px; padding: 20px; margin: 16px 0; }
